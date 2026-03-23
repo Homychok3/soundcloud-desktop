@@ -296,11 +296,22 @@
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
 
-        <a class="download" href="https://github.com/homychok/soundcloud-desktop/releases/latest/download/HomyCloud-Setup-1.0.0.exe" target="_blank" rel="noopener noreferrer">
+        <a class="download" id="downloadInstallerBtn" href="https://github.com/Homychok3/soundcloud-desktop/releases/download/v1.0.0/HomyCloud-Setup-1.0.0.exe" rel="noopener noreferrer">
           Скачать Installer
         </a>
-        <div class="hint">Если версия изменилась, открой <a href="https://github.com/homychok/soundcloud-desktop/releases/latest">последний релиз</a> и скачай Setup.</div>
+        <div class="hint">Если версия изменилась, открой <a href="https://github.com/Homychok3/soundcloud-desktop/releases/latest">последний релиз</a> и скачай Setup.</div>
       </section>
     </main>
+    <script>
+      const installerUrl =
+        "https://github.com/Homychok3/soundcloud-desktop/releases/download/v1.0.0/HomyCloud-Setup-1.0.0.exe";
+      const downloadBtn = document.getElementById("downloadInstallerBtn");
+      if (downloadBtn) {
+        downloadBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.location.href = installerUrl;
+        });
+      }
+    </script>
   </body>
 </html>
