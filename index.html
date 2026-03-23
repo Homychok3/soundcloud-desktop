@@ -1,0 +1,1993 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoundCloud Desktop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #090909;
+        --panel: #111111;
+        --panel-2: #181818;
+        --panel-3: #202020;
+        --border: rgba(255, 255, 255, 0.06);
+        --text: #efefef;
+        --muted: #666;
+        --muted-2: #444;
+        --accent: #ff5500;
+        --accent-dim: rgba(255, 85, 0, 0.12);
+        --accent-border: rgba(255, 85, 0, 0.22);
+        --discord: #5865f2;
+        --discord-dim: rgba(88, 101, 242, 0.1);
+        --discord-border: rgba(88, 101, 242, 0.2);
+        --ok: #57f287;
+        --warn: #faa61a;
+        --err: #ed4245;
+        --titlebar-h: 62px;
+        --glow-1: rgba(255, 85, 0, 0.18);
+        --glow-2: rgba(255, 140, 0, 0.12);
+        --glow-3: rgba(88, 101, 242, 0.08);
+      }
+
+      body.theme-ocean {
+        --bg: #071118;
+        --panel: #0d1820;
+        --panel-2: #12212b;
+        --panel-3: #17303d;
+        --border: rgba(166, 224, 255, 0.09);
+        --text: #edf9ff;
+        --muted: #7e9aaa;
+        --muted-2: #476170;
+        --accent: #32c8ff;
+        --accent-dim: rgba(50, 200, 255, 0.14);
+        --accent-border: rgba(50, 200, 255, 0.24);
+        --discord-dim: rgba(88, 101, 242, 0.14);
+        --discord-border: rgba(88, 101, 242, 0.24);
+        --glow-1: rgba(50, 200, 255, 0.18);
+        --glow-2: rgba(0, 149, 255, 0.12);
+        --glow-3: rgba(34, 211, 238, 0.1);
+      }
+
+      body.theme-carbon {
+        --bg: #0a0a0b;
+        --panel: #121214;
+        --panel-2: #18191d;
+        --panel-3: #202228;
+        --border: rgba(255, 255, 255, 0.07);
+        --text: #f5f5f5;
+        --muted: #8d8d95;
+        --muted-2: #585862;
+        --accent: #e6e6e6;
+        --accent-dim: rgba(255, 255, 255, 0.08);
+        --accent-border: rgba(255, 255, 255, 0.14);
+        --discord-dim: rgba(88, 101, 242, 0.1);
+        --discord-border: rgba(88, 101, 242, 0.18);
+        --glow-1: rgba(255, 255, 255, 0.08);
+        --glow-2: rgba(160, 160, 160, 0.06);
+        --glow-3: rgba(88, 101, 242, 0.06);
+      }
+
+      body.theme-sunset {
+        --bg: #140b0d;
+        --panel: #1b1114;
+        --panel-2: #26171c;
+        --panel-3: #311d24;
+        --border: rgba(255, 206, 170, 0.1);
+        --text: #fff2eb;
+        --muted: #c59d92;
+        --muted-2: #7b5b55;
+        --accent: #ff7a2f;
+        --accent-dim: rgba(255, 122, 47, 0.16);
+        --accent-border: rgba(255, 122, 47, 0.28);
+        --discord-dim: rgba(255, 122, 47, 0.08);
+        --discord-border: rgba(255, 180, 120, 0.18);
+        --glow-1: rgba(255, 96, 64, 0.22);
+        --glow-2: rgba(255, 180, 67, 0.16);
+        --glow-3: rgba(255, 110, 160, 0.11);
+      }
+
+      body.theme-forest {
+        --bg: #07100b;
+        --panel: #0d1711;
+        --panel-2: #122119;
+        --panel-3: #183024;
+        --border: rgba(171, 255, 207, 0.08);
+        --text: #edfdf1;
+        --muted: #86ab92;
+        --muted-2: #4e6d57;
+        --accent: #4ad66d;
+        --accent-dim: rgba(74, 214, 109, 0.14);
+        --accent-border: rgba(74, 214, 109, 0.24);
+        --discord-dim: rgba(74, 214, 109, 0.08);
+        --discord-border: rgba(74, 214, 109, 0.14);
+        --glow-1: rgba(74, 214, 109, 0.18);
+        --glow-2: rgba(0, 186, 124, 0.12);
+        --glow-3: rgba(144, 255, 184, 0.08);
+      }
+
+      body.theme-neon {
+        --bg: #080710;
+        --panel: #11111d;
+        --panel-2: #19182a;
+        --panel-3: #232038;
+        --border: rgba(255, 255, 255, 0.08);
+        --text: #f7f2ff;
+        --muted: #9a92b8;
+        --muted-2: #60567f;
+        --accent: #ff4d9d;
+        --accent-dim: rgba(255, 77, 157, 0.15);
+        --accent-border: rgba(255, 77, 157, 0.28);
+        --discord-dim: rgba(127, 90, 240, 0.12);
+        --discord-border: rgba(127, 90, 240, 0.24);
+        --glow-1: rgba(255, 77, 157, 0.2);
+        --glow-2: rgba(127, 90, 240, 0.18);
+        --glow-3: rgba(0, 224, 255, 0.12);
+      }
+
+      body.theme-iridescent {
+        --bg: #0b0812;
+        --panel: rgba(20, 16, 30, 0.88);
+        --panel-2: rgba(28, 21, 42, 0.9);
+        --panel-3: rgba(34, 24, 52, 0.92);
+        --border: rgba(255, 255, 255, 0.1);
+        --text: #fff6ff;
+        --muted: #b6a6c8;
+        --muted-2: #6f6284;
+        --accent: #ff78c8;
+        --accent-dim: rgba(255, 120, 200, 0.16);
+        --accent-border: rgba(255, 120, 200, 0.26);
+        --discord-dim: rgba(124, 92, 255, 0.16);
+        --discord-border: rgba(124, 92, 255, 0.26);
+        --glow-1: rgba(255, 120, 200, 0.22);
+        --glow-2: rgba(120, 180, 255, 0.18);
+        --glow-3: rgba(160, 255, 210, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(circle at 10% 10%, var(--glow-1), transparent 28%),
+          radial-gradient(circle at 90% 18%, var(--glow-2), transparent 24%),
+          radial-gradient(circle at 50% 90%, var(--glow-3), transparent 28%),
+          var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", "Segoe UI", sans-serif;
+        font-size: 13px;
+        -webkit-font-smoothing: antialiased;
+        overflow: hidden;
+        position: relative;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -20%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::before {
+        background:
+          radial-gradient(circle at 20% 30%, var(--glow-1), transparent 22%),
+          radial-gradient(circle at 75% 22%, var(--glow-2), transparent 18%);
+        filter: blur(38px);
+        animation: floatGlow 16s ease-in-out infinite alternate;
+      }
+
+      body::after {
+        background:
+          linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.025) 45%, transparent 100%);
+        transform: translateX(-30%);
+        animation: sweepGlow 18s linear infinite;
+        opacity: 0.5;
+      }
+
+      body.theme-iridescent {
+        background:
+          linear-gradient(135deg, rgba(255, 120, 200, 0.14), transparent 22%),
+          linear-gradient(225deg, rgba(120, 180, 255, 0.16), transparent 24%),
+          linear-gradient(315deg, rgba(160, 255, 210, 0.12), transparent 20%),
+          var(--bg);
+      }
+
+      body.theme-iridescent::before {
+        background:
+          linear-gradient(
+            120deg,
+            rgba(255, 0, 128, 0.16),
+            rgba(255, 120, 0, 0.14),
+            rgba(255, 230, 0, 0.12),
+            rgba(0, 255, 170, 0.14),
+            rgba(0, 170, 255, 0.16),
+            rgba(130, 90, 255, 0.16),
+            rgba(255, 0, 200, 0.14)
+          ),
+          radial-gradient(circle at 18% 25%, rgba(255, 120, 200, 0.26), transparent 18%),
+          radial-gradient(circle at 80% 22%, rgba(120, 180, 255, 0.22), transparent 16%),
+          radial-gradient(circle at 60% 72%, rgba(160, 255, 210, 0.18), transparent 20%);
+        background-size: 300% 300%, auto, auto, auto;
+        filter: blur(44px) saturate(150%) hue-rotate(0deg);
+        animation: iridescentBloom 14s ease-in-out infinite alternate, rainbowFlow 12s linear infinite;
+      }
+
+      body.theme-iridescent::after {
+        background:
+          linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.03) 22%,
+            rgba(255, 120, 200, 0.08) 36%,
+            rgba(120, 180, 255, 0.08) 54%,
+            rgba(160, 255, 210, 0.07) 70%,
+            transparent 100%
+          );
+        opacity: 0.78;
+        background-size: 220% 220%;
+        mix-blend-mode: screen;
+        animation: iridescentSweep 8s linear infinite, iridescentShift 14s ease-in-out infinite alternate;
+      }
+
+      body.theme-iridescent .app::before {
+        opacity: 0.52;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 34px 34px;
+        animation: gridFloat 16s linear infinite, iridescentShift 16s ease-in-out infinite alternate;
+      }
+
+      body.compact {
+        --titlebar-h: 48px;
+      }
+
+      @keyframes floatGlow {
+        0% {
+          transform: translate3d(-2%, 0, 0) scale(1);
+        }
+        100% {
+          transform: translate3d(2%, -3%, 0) scale(1.06);
+        }
+      }
+
+      @keyframes sweepGlow {
+        0% {
+          transform: translateX(-45%);
+        }
+        100% {
+          transform: translateX(45%);
+        }
+      }
+
+      @keyframes iridescentBloom {
+        0% {
+          transform: translate3d(-1%, 1%, 0) scale(1);
+          filter: blur(44px) saturate(150%) hue-rotate(0deg);
+        }
+        50% {
+          transform: translate3d(2%, -2%, 0) scale(1.05);
+          filter: blur(48px) saturate(170%) hue-rotate(55deg);
+        }
+        100% {
+          transform: translate3d(-2%, 3%, 0) scale(1.08);
+          filter: blur(46px) saturate(160%) hue-rotate(120deg);
+        }
+      }
+
+      @keyframes iridescentSweep {
+        0% {
+          transform: translateX(-55%) skewX(-10deg);
+          background-position: 0% 50%;
+        }
+        100% {
+          transform: translateX(55%) skewX(-10deg);
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes iridescentShift {
+        0% {
+          filter: hue-rotate(0deg) saturate(100%);
+        }
+        50% {
+          filter: hue-rotate(80deg) saturate(118%);
+        }
+        100% {
+          filter: hue-rotate(160deg) saturate(108%);
+        }
+      }
+
+      @keyframes rainbowFlow {
+        0% {
+          background-position: 0% 50%, 0 0, 0 0, 0 0;
+        }
+        50% {
+          background-position: 100% 50%, 0 0, 0 0, 0 0;
+        }
+        100% {
+          background-position: 0% 50%, 0 0, 0 0, 0 0;
+        }
+      }
+
+      .app {
+        display: grid;
+        grid-template-rows: var(--titlebar-h) 1fr;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .app::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.38;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+        animation: gridFloat 24s linear infinite;
+      }
+
+      @keyframes gridFloat {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(42px, 24px, 0);
+        }
+      }
+
+      .titlebar {
+        -webkit-app-region: drag;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 10px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .titlebar::before {
+        content: "";
+        position: absolute;
+        left: -60px;
+        top: -40px;
+        width: 260px;
+        height: 160px;
+        background: radial-gradient(ellipse, rgba(255, 85, 0, 0.07) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .brand {
+        -webkit-app-region: no-drag;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+      }
+
+      .brand-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .brand-circle svg {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
+        display: block;
+      }
+
+      .brand-text {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: var(--accent);
+        text-transform: none;
+        line-height: 1.1;
+      }
+
+      .sep {
+        width: 1px;
+        height: 26px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
+      .track {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .cover {
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #ff5500 0%, #ff8c00 100%);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover.hidden {
+        display: none;
+      }
+
+      .cover-wave {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
+        animation: coverWave 2.4s ease-in-out infinite;
+      }
+
+      @keyframes coverWave {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .track-text {
+        min-width: 0;
+      }
+
+      .track-name {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 380px;
+        color: var(--text);
+        line-height: 1.25;
+      }
+
+      .track-artist {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 380px;
+      }
+
+      .playstate {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 9px;
+        border-radius: 20px;
+        background: var(--accent-dim);
+        border: 1px solid var(--accent-border);
+        flex-shrink: 0;
+      }
+
+      .wave {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        height: 14px;
+      }
+
+      .wave-b {
+        width: 2.5px;
+        background: var(--accent);
+        border-radius: 1.5px;
+        animation: waveAnim 0.75s ease-in-out infinite;
+      }
+
+      .wave-b:nth-child(1) { animation-delay: 0s; }
+      .wave-b:nth-child(2) { animation-delay: 0.12s; }
+      .wave-b:nth-child(3) { animation-delay: 0.24s; }
+      .wave-b:nth-child(4) { animation-delay: 0.36s; }
+
+      @keyframes waveAnim {
+        0%,
+        100% {
+          height: 3px;
+        }
+        50% {
+          height: 12px;
+        }
+      }
+
+      .playstate-label {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.3px;
+      }
+
+      .playstate.paused {
+        background: rgba(250, 166, 26, 0.1);
+        border-color: rgba(250, 166, 26, 0.2);
+      }
+
+      .playstate.paused .wave-b {
+        background: var(--warn);
+        animation-play-state: paused;
+        height: 5px !important;
+      }
+
+      .playstate.paused .playstate-label {
+        color: var(--warn);
+      }
+
+      .playstate.idle {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--border);
+      }
+
+      .playstate.idle .wave-b {
+        background: var(--muted-2);
+        animation-play-state: paused;
+        height: 3px !important;
+      }
+
+      .playstate.idle .playstate-label {
+        color: var(--muted);
+      }
+
+      .discord-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 8px;
+        background: var(--discord-dim);
+        border: 1px solid var(--discord-border);
+        flex-shrink: 0;
+        -webkit-app-region: no-drag;
+      }
+
+      .discord-badge.hidden {
+        display: none;
+      }
+
+      .d-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--warn);
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+
+      .d-dot.connected {
+        background: var(--ok);
+        box-shadow: 0 0 7px rgba(87, 242, 135, 0.65);
+        animation: dotPulse 2.2s ease-in-out infinite;
+      }
+
+      .d-dot.error {
+        background: var(--err);
+      }
+
+      @keyframes dotPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 4px rgba(87, 242, 135, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 11px rgba(87, 242, 135, 0.95);
+        }
+      }
+
+      .d-label {
+        font-size: 11px;
+        color: #7289da;
+        font-weight: 500;
+      }
+
+      .titlebar .brand,
+      .titlebar .discord-badge {
+        display: none !important;
+      }
+
+      .settings-btn,
+      .wbtn {
+        -webkit-app-region: no-drag;
+        min-width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+      }
+
+      .settings-btn {
+        position: relative;
+        z-index: 3;
+      }
+
+      .settings-btn::before,
+      .settings-btn::after {
+        content: none !important;
+      }
+
+      .settings-btn-mask {
+        -webkit-app-region: no-drag;
+        width: 64px;
+        height: 38px;
+        margin-right: -6px;
+        border-radius: 12px;
+        background:
+          radial-gradient(ellipse at left center, rgba(255, 85, 0, 0.05), transparent 55%),
+          var(--panel);
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+      }
+
+      .settings-btn ~ button:not(.wbtn),
+      .settings-btn ~ div:not(.window-controls) {
+        display: none !important;
+      }
+
+      .discord-badge + *:not(.settings-btn) {
+        display: none !important;
+      }
+
+      .settings-btn:hover,
+      .wbtn:hover {
+        background: rgba(255, 255, 255, 0.09);
+        color: #ccc;
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 4px;
+        -webkit-app-region: no-drag;
+        flex-shrink: 0;
+      }
+
+      .wbtn {
+        width: 32px;
+        border-radius: 7px;
+        font-size: 12px;
+      }
+
+      .wbtn.close:hover {
+        background: rgba(237, 66, 69, 0.75);
+        color: #fff;
+      }
+
+      .content {
+        position: relative;
+        min-height: 0;
+      }
+
+      webview {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: var(--bg);
+      }
+
+      .settings-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 5, 7, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .settings-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .settings-panel {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        bottom: 14px;
+        width: 360px;
+        max-width: calc(100vw - 28px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(18, 18, 20, 0.98), rgba(13, 13, 15, 0.98));
+        box-shadow: 0 18px 80px rgba(0, 0, 0, 0.45);
+        transform: translateX(calc(100% + 28px));
+        transition: transform 0.22s ease;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .settings-overlay.open .settings-panel {
+        transform: translateX(0);
+      }
+
+      .settings-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .settings-title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .settings-body {
+        padding: 14px 16px 18px;
+        overflow: auto;
+      }
+
+      .settings-section + .settings-section {
+        margin-top: 22px;
+      }
+
+      .section-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .option-row,
+      .hotkey-row,
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .option-copy {
+        min-width: 0;
+      }
+
+      .option-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .option-desc {
+        margin-top: 3px;
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .toggle {
+        position: relative;
+        width: 42px;
+        height: 24px;
+        appearance: none;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        outline: none;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      .toggle::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.15s ease;
+      }
+
+      .toggle:checked {
+        background: rgba(255, 85, 0, 0.7);
+      }
+
+      .toggle:checked::after {
+        transform: translateX(18px);
+      }
+
+      select,
+      input[type="text"] {
+        width: 150px;
+        height: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        background: var(--panel-2);
+        color: var(--text);
+        padding: 0 10px;
+        outline: none;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .field-row input[type="text"] {
+        width: 100%;
+      }
+
+      .hint-card {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.55;
+        white-space: pre-line;
+      }
+
+      .hotkey-row {
+        grid-template-columns: 1fr auto auto;
+      }
+
+      .key-chip {
+        min-width: 120px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+        text-align: center;
+        font-size: 11px;
+        color: #ddd;
+      }
+
+      .small-btn {
+        height: 30px;
+        padding: 0 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .small-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .save-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .status-text {
+        margin-top: 12px;
+        font-size: 11px;
+        color: var(--muted);
+        min-height: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="titlebar">
+        <div class="track">
+          <div class="cover" id="coverEl">
+            <div class="cover-wave" id="coverWave"></div>
+            ♫
+          </div>
+          <div class="track-text">
+            <div class="track-name" id="trackTitle">Трек не играет</div>
+            <div class="track-artist" id="trackArtist">—</div>
+          </div>
+        </div>
+
+        <div class="playstate idle" id="playstate">
+          <div class="wave">
+            <div class="wave-b"></div>
+            <div class="wave-b"></div>
+            <div class="wave-b"></div>
+            <div class="wave-b"></div>
+          </div>
+          <span class="playstate-label" id="playstateLabel">—</span>
+        </div>
+
+        <div class="discord-badge">
+          <div class="d-dot" id="rpcDot"></div>
+          <span class="d-label" id="rpcText">Discord...</span>
+        </div>
+
+        <div class="settings-btn-mask" aria-hidden="true"></div>
+        <button class="settings-btn" id="settingsBtn" title="Настройки">⚙</button>
+
+        <div class="window-controls">
+          <button class="wbtn" id="minBtn" title="Свернуть">—</button>
+          <button class="wbtn" id="maxBtn" title="Развернуть">▢</button>
+          <button class="wbtn close" id="closeBtn" title="Закрыть">✕</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <webview
+          id="scView"
+          partition="persist:soundcloud"
+          allowpopups
+          useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        ></webview>
+
+        <div class="settings-overlay" id="settingsOverlay">
+          <div class="settings-panel">
+            <div class="settings-head">
+              <div class="settings-title" id="settingsTitle">Настройки</div>
+              <button class="small-btn" id="closeSettingsBtn">Закрыть</button>
+            </div>
+            <div class="settings-body">
+              <div class="settings-section">
+                <div class="section-title" id="sectionConnection">Подключение</div>
+                <div class="field-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelDiscordClientId">Discord Client ID</div>
+                    <div class="option-desc" id="descDiscordClientId">Вставь Application ID из Discord Developer Portal.</div>
+                  </div>
+                  <input type="text" id="discordClientId" placeholder="123456789012345678" />
+                </div>
+                <div class="field-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelRichPresenceImageKey">Art Asset Key</div>
+                    <div class="option-desc" id="descRichPresenceImageKey">Ключ изображения для Rich Presence.</div>
+                  </div>
+                  <input type="text" id="richPresenceImageKey" placeholder="soundcloud_logo" />
+                </div>
+                <div class="field-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelSoundcloudUrl">URL SoundCloud</div>
+                    <div class="option-desc" id="descSoundcloudUrl">Стартовый адрес, который открывается в webview.</div>
+                  </div>
+                  <input type="text" id="soundcloudUrl" placeholder="https://soundcloud.com" />
+                </div>
+                <div class="save-row">
+                  <button class="small-btn" id="saveConnectionBtn">Сохранить</button>
+                </div>
+                <div class="hint-card" id="clientIdHint">Почему нужен Client ID:
+
+Это просто идентификатор твоего приложения в Discord, не секретный ключ.
+Он нужен чтобы Discord знал как называть активность и какие иконки использовать.
+Создаётся бесплатно за 30 секунд.
+
+Как получить:
+
+Заходишь на discord.com/developers/applications
+Нажимаешь New Application и вводишь название, например SoundCloud
+Копируешь Application ID — это и есть твой Client ID
+В разделе Rich Presence -> Art Assets загружаешь иконку soundcloud_logo
+Вставляешь ID сюда</div>
+              </div>
+
+              <div class="settings-section">
+                <div class="section-title" id="sectionRpc">Discord Rich Presence</div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelRpcEnabled">Активность в Discord</div>
+                    <div class="option-desc" id="descRpcEnabled">Главный переключатель показа активности в профиле Discord.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="rpcEnabled" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelRpcShowTimer">Показывать таймер</div>
+                    <div class="option-desc" id="descRpcShowTimer">Таймер виден только пока трек реально играет.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="rpcShowTimer" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelRpcShowArtist">Показывать исполнителя</div>
+                    <div class="option-desc" id="descRpcShowArtist">Имя артиста попадет в строку состояния Discord.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="rpcShowArtist" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelRpcPausedStatus">При паузе</div>
+                    <div class="option-desc" id="descRpcPausedStatus">Либо показывать паузу, либо очищать активность.</div>
+                  </div>
+                  <select id="rpcPausedStatus">
+                    <option value="show_paused">Показывать "Пауза"</option>
+                    <option value="clear">Очищать активность</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <div class="section-title" id="sectionNotifications">Уведомления</div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelNotificationsEnabled">Уведомления о смене трека</div>
+                    <div class="option-desc" id="descNotificationsEnabled">Системное уведомление при переключении на другой трек.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="notificationsEnabled" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelNotificationsStyle">Стиль</div>
+                    <div class="option-desc" id="descNotificationsStyle">Minimal — только название, Full — название и исполнитель.</div>
+                  </div>
+                  <select id="notificationsStyle">
+                    <option value="minimal">Minimal</option>
+                    <option value="full">Full</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <div class="section-title" id="sectionHotkeys">Горячие клавиши</div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyPlayPause">Play / Pause</div>
+                  <div class="key-chip" id="hotkey-playPause">MediaPlayPause</div>
+                  <button class="small-btn hotkey-btn" data-action="playPause">Изменить</button>
+                </div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyNextTrack">Следующий трек</div>
+                  <div class="key-chip" id="hotkey-nextTrack">MediaNextTrack</div>
+                  <button class="small-btn hotkey-btn" data-action="nextTrack">Изменить</button>
+                </div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyPrevTrack">Предыдущий трек</div>
+                  <div class="key-chip" id="hotkey-prevTrack">MediaPreviousTrack</div>
+                  <button class="small-btn hotkey-btn" data-action="prevTrack">Изменить</button>
+                </div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyLikeTrack">Лайкнуть</div>
+                  <div class="key-chip" id="hotkey-likeTrack">Ctrl+L</div>
+                  <button class="small-btn hotkey-btn" data-action="likeTrack">Изменить</button>
+                </div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyMuteToggle">Mute</div>
+                  <div class="key-chip" id="hotkey-muteToggle">Ctrl+M</div>
+                  <button class="small-btn hotkey-btn" data-action="muteToggle">Изменить</button>
+                </div>
+                <div class="hotkey-row">
+                  <div class="option-label" id="labelHotkeyToggleWindow">Показать окно</div>
+                  <div class="key-chip" id="hotkey-toggleWindow">Ctrl+Shift+S</div>
+                  <button class="small-btn hotkey-btn" data-action="toggleWindow">Изменить</button>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <div class="section-title" id="sectionUi">Интерфейс</div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelUiCoverArt">Обложка в titlebar</div>
+                    <div class="option-desc" id="descUiCoverArt">Показывать оранжевую иконку трека слева.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiCoverArt" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelUiStartMinimized">Запускать свернутым</div>
+                    <div class="option-desc" id="descUiStartMinimized">При старте окно будет скрыто в трей.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiStartMinimized" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label">Always on top</div>
+                    <div class="option-desc">Держать окно поверх других приложений.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiAlwaysOnTop" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelUiAutoLaunch">Автозапуск</div>
+                    <div class="option-desc" id="descUiAutoLaunch">Автоматически запускать приложение вместе с Windows.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiAutoLaunch" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label">Remember last page</div>
+                    <div class="option-desc">Открывать ту же страницу и сохранять сессию SoundCloud.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiRememberLastPage" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label">Focus mode</div>
+                    <div class="option-desc">Скрывать часть лишних блоков SoundCloud и оставить плеер чище.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="uiFocusMode" />
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelUiTitlebarHeight">Высота titlebar</div>
+                    <div class="option-desc" id="descUiTitlebarHeight">Компактный или обычный режим верхней панели.</div>
+                  </div>
+                  <select id="uiTitlebarHeight">
+                    <option value="compact">Компактная</option>
+                    <option value="normal">Обычная</option>
+                  </select>
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label" id="labelUiLanguage">Язык</div>
+                    <div class="option-desc" id="descUiLanguage">Переключение языка интерфейса.</div>
+                  </div>
+                  <select id="uiLanguage">
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                  </select>
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label">Theme</div>
+                    <div class="option-desc">Визуальная тема приложения и фоновые акценты.</div>
+                  </div>
+                  <select id="uiTheme">
+                    <option value="ember">Ember</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="carbon">Carbon</option>
+                    <option value="sunset">Sunset</option>
+                    <option value="forest">Forest</option>
+                    <option value="neon">Neon</option>
+                    <option value="iridescent">Iridescent</option>
+                  </select>
+                </div>
+                <div class="option-row">
+                  <div class="option-copy">
+                    <div class="option-label">Ad and tracker blocking</div>
+                    <div class="option-desc">Блокировать часть рекламных и аналитических запросов в webview.</div>
+                  </div>
+                  <input class="toggle" type="checkbox" id="privacyBlockAds" />
+                </div>
+              </div>
+
+              <div class="status-text" id="settingsStatus"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const DEFAULT_SETTINGS = {
+        discordClientId: "",
+        richPresenceImageKey: "soundcloud_logo",
+        soundcloudUrl: "https://soundcloud.com",
+        rpc: {
+          enabled: true,
+          showTimer: true,
+          showArtist: true,
+          pausedStatus: "show_paused"
+        },
+        notifications: {
+          enabled: true,
+          style: "full"
+        },
+        hotkeys: {
+          playPause: "MediaPlayPause",
+          nextTrack: "MediaNextTrack",
+          prevTrack: "MediaPreviousTrack",
+          likeTrack: "Ctrl+L",
+          muteToggle: "Ctrl+M",
+          toggleWindow: "Ctrl+Shift+S"
+        },
+        ui: {
+          titlebarHeight: "normal",
+          coverArt: true,
+          startMinimized: false,
+          autoLaunch: false,
+          language: "ru"
+        }
+      };
+
+      const scView = document.getElementById("scView");
+      const trackTitleEl = document.getElementById("trackTitle");
+      const trackArtistEl = document.getElementById("trackArtist");
+      const playstateEl = document.getElementById("playstate");
+      const playstateLabel = document.getElementById("playstateLabel");
+      const coverEl = document.getElementById("coverEl");
+      const coverWaveEl = document.getElementById("coverWave");
+      const discordBadge = document.querySelector(".discord-badge");
+      const rpcText = document.getElementById("rpcText");
+      const rpcDot = document.getElementById("rpcDot");
+      const settingsOverlay = document.getElementById("settingsOverlay");
+      const settingsStatus = document.getElementById("settingsStatus");
+
+      const minBtn = document.getElementById("minBtn");
+      const maxBtn = document.getElementById("maxBtn");
+      const closeBtn = document.getElementById("closeBtn");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+      const saveConnectionBtn = document.getElementById("saveConnectionBtn");
+
+      const rpcEnabled = document.getElementById("rpcEnabled");
+      const rpcShowTimer = document.getElementById("rpcShowTimer");
+      const rpcShowArtist = document.getElementById("rpcShowArtist");
+      const rpcPausedStatus = document.getElementById("rpcPausedStatus");
+      const notificationsEnabled = document.getElementById("notificationsEnabled");
+      const notificationsStyle = document.getElementById("notificationsStyle");
+      const uiCoverArt = document.getElementById("uiCoverArt");
+      const uiStartMinimized = document.getElementById("uiStartMinimized");
+      const uiAutoLaunch = document.getElementById("uiAutoLaunch");
+      const uiAlwaysOnTop = document.getElementById("uiAlwaysOnTop");
+      const uiRememberLastPage = document.getElementById("uiRememberLastPage");
+      const uiFocusMode = document.getElementById("uiFocusMode");
+      const uiTitlebarHeight = document.getElementById("uiTitlebarHeight");
+      const uiLanguage = document.getElementById("uiLanguage");
+      const uiTheme = document.getElementById("uiTheme");
+      const privacyBlockAds = document.getElementById("privacyBlockAds");
+
+      const discordClientId = document.getElementById("discordClientId");
+      const richPresenceImageKey = document.getElementById("richPresenceImageKey");
+      const soundcloudUrl = document.getElementById("soundcloudUrl");
+
+      const i18n = {
+        ru: {
+          settings: "Настройки",
+          close: "Закрыть",
+          save: "Сохранить",
+          sound: "SoundCloud Desktop",
+          noTrack: "Трек не играет",
+          noArtist: "—",
+          discordDefault: "Discord...",
+          discordConnecting: "Подключение",
+          discordReconnecting: "Переподключение",
+          discordNeedId: "Нужен Client ID",
+          discordDisabled: "RPC выключен",
+          discordError: "Ошибка RPC",
+          playbackIdle: "—",
+          playbackPlaying: "playing",
+          playbackPaused: "paused",
+          saved: "Настройка сохранена.",
+          connectionSaved: "Параметры подключения сохранены.",
+          rebindPrompt: "Нажмите комбинацию клавиш. Отмена: Esc.",
+          rebindCancel: "Переназначение отменено.",
+          rebindTimeout: "Время ожидания истекло.",
+          rebindSaved: "Горячая клавиша сохранена:",
+          rebindFailed: "Не удалось сохранить горячую клавишу.",
+          titleCompact: "Компактная",
+          titleNormal: "Обычная",
+          langRu: "Русский",
+          langEn: "English",
+          sectionConnection: "Подключение",
+          labelDiscordClientId: "Discord Client ID",
+          descDiscordClientId: "Вставь Application ID из Discord Developer Portal.",
+          labelRichPresenceImageKey: "Art Asset Key",
+          descRichPresenceImageKey: "Ключ изображения для Rich Presence.",
+          labelSoundcloudUrl: "URL SoundCloud",
+          descSoundcloudUrl: "Стартовый адрес, который открывается в webview.",
+          clientIdHint: `Почему нужен Client ID:\n\nЭто просто идентификатор твоего приложения в Discord, не секретный ключ.\nОн нужен чтобы Discord знал как называть активность и какие иконки использовать.\nСоздаётся бесплатно за 30 секунд.\n\nКак получить:\n\nЗаходишь на discord.com/developers/applications\nНажимаешь New Application и вводишь название, например SoundCloud\nКопируешь Application ID — это и есть твой Client ID\nВ разделе Rich Presence -> Art Assets загружаешь иконку soundcloud_logo\nВставляешь ID сюда`,
+          sectionRpc: "Discord Rich Presence",
+          labelRpcEnabled: "Активность в Discord",
+          descRpcEnabled: "Главный переключатель показа активности в профиле Discord.",
+          labelRpcShowTimer: "Показывать таймер",
+          descRpcShowTimer: "Таймер виден только пока трек реально играет.",
+          labelRpcShowArtist: "Показывать исполнителя",
+          descRpcShowArtist: "Имя артиста попадет в строку состояния Discord.",
+          labelRpcPausedStatus: "При паузе",
+          descRpcPausedStatus: "Либо показывать паузу, либо очищать активность.",
+          pausedShow: 'Показывать "Пауза"',
+          pausedClear: "Очищать активность",
+          sectionNotifications: "Уведомления",
+          labelNotificationsEnabled: "Уведомления о смене трека",
+          descNotificationsEnabled: "Системное уведомление при переключении на другой трек.",
+          labelNotificationsStyle: "Стиль",
+          descNotificationsStyle: "Minimal — только название, Full — название и исполнитель.",
+          sectionHotkeys: "Горячие клавиши",
+          labelHotkeyPlayPause: "Play / Pause",
+          labelHotkeyNextTrack: "Следующий трек",
+          labelHotkeyPrevTrack: "Предыдущий трек",
+          labelHotkeyLikeTrack: "Лайкнуть",
+          labelHotkeyMuteToggle: "Mute",
+          labelHotkeyToggleWindow: "Показать окно",
+          change: "Изменить",
+          listening: "Нажмите...",
+          sectionUi: "Интерфейс",
+          labelUiCoverArt: "Обложка в titlebar",
+          descUiCoverArt: "Показывать оранжевую иконку трека слева.",
+          labelUiStartMinimized: "Запускать свернутым",
+          descUiStartMinimized: "При старте окно будет скрыто в трей.",
+          labelUiAutoLaunch: "Автозапуск",
+          descUiAutoLaunch: "Автоматически запускать приложение вместе с Windows.",
+          labelUiTitlebarHeight: "Высота titlebar",
+          descUiTitlebarHeight: "Компактный или обычный режим верхней панели.",
+          labelUiLanguage: "Язык",
+          descUiLanguage: "Переключение языка интерфейса."
+        },
+        en: {
+          settings: "Settings",
+          close: "Close",
+          save: "Save",
+          sound: "SoundCloud Desktop",
+          noTrack: "No track playing",
+          noArtist: "—",
+          discordDefault: "Discord...",
+          discordConnecting: "Connecting",
+          discordReconnecting: "Reconnecting",
+          discordNeedId: "Client ID required",
+          discordDisabled: "RPC disabled",
+          discordError: "RPC error",
+          playbackIdle: "—",
+          playbackPlaying: "playing",
+          playbackPaused: "paused",
+          saved: "Setting saved.",
+          connectionSaved: "Connection settings saved.",
+          rebindPrompt: "Press a key combination. Esc to cancel.",
+          rebindCancel: "Rebind cancelled.",
+          rebindTimeout: "Timed out waiting for input.",
+          rebindSaved: "Hotkey saved:",
+          rebindFailed: "Failed to save hotkey.",
+          titleCompact: "Compact",
+          titleNormal: "Normal",
+          langRu: "Russian",
+          langEn: "English",
+          sectionConnection: "Connection",
+          labelDiscordClientId: "Discord Client ID",
+          descDiscordClientId: "Paste the Application ID from Discord Developer Portal.",
+          labelRichPresenceImageKey: "Art Asset Key",
+          descRichPresenceImageKey: "Image key for Rich Presence assets.",
+          labelSoundcloudUrl: "SoundCloud URL",
+          descSoundcloudUrl: "Start URL loaded inside the webview.",
+          clientIdHint: `Why Client ID is needed:\n\nIt is only the identifier of your Discord application, not a secret key.\nDiscord uses it to know how to label the activity and which art assets to use.\nIt takes about 30 seconds to create.\n\nHow to get it:\n\nOpen discord.com/developers/applications\nClick New Application and enter a name, for example SoundCloud\nCopy Application ID — that is your Client ID\nIn Rich Presence -> Art Assets upload the soundcloud_logo image\nPaste the ID here`,
+          sectionRpc: "Discord Rich Presence",
+          labelRpcEnabled: "Discord Activity",
+          descRpcEnabled: "Main switch for showing activity in your Discord profile.",
+          labelRpcShowTimer: "Show timer",
+          descRpcShowTimer: "The timer is shown only while the track is actually playing.",
+          labelRpcShowArtist: "Show artist",
+          descRpcShowArtist: "The artist name is sent to the Discord state line.",
+          labelRpcPausedStatus: "On pause",
+          descRpcPausedStatus: "Either show paused state or clear the activity.",
+          pausedShow: 'Show "Paused"',
+          pausedClear: "Clear activity",
+          sectionNotifications: "Notifications",
+          labelNotificationsEnabled: "Track change notifications",
+          descNotificationsEnabled: "Show a system notification when the track changes.",
+          labelNotificationsStyle: "Style",
+          descNotificationsStyle: "Minimal = title only, Full = title and artist.",
+          sectionHotkeys: "Hotkeys",
+          labelHotkeyPlayPause: "Play / Pause",
+          labelHotkeyNextTrack: "Next track",
+          labelHotkeyPrevTrack: "Previous track",
+          labelHotkeyLikeTrack: "Like track",
+          labelHotkeyMuteToggle: "Mute",
+          labelHotkeyToggleWindow: "Toggle window",
+          change: "Change",
+          listening: "Press keys...",
+          sectionUi: "Interface",
+          labelUiCoverArt: "Cover art in titlebar",
+          descUiCoverArt: "Show the orange track icon on the left.",
+          labelUiStartMinimized: "Start minimized",
+          descUiStartMinimized: "Hide the window to tray on startup.",
+          labelUiAutoLaunch: "Auto launch",
+          descUiAutoLaunch: "Start the application automatically with Windows.",
+          labelUiTitlebarHeight: "Titlebar height",
+          descUiTitlebarHeight: "Compact or normal top bar height.",
+          labelUiLanguage: "Language",
+          descUiLanguage: "Switch the interface language."
+        }
+      };
+
+      let currentSettings = structuredClone(DEFAULT_SETTINGS);
+      let rebindState = null;
+      let currentLocale = "ru";
+
+      function t(key) {
+        return (i18n[currentLocale] && i18n[currentLocale][key]) || i18n.ru[key] || key;
+      }
+
+      function setText(id, key) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t(key);
+      }
+
+      function applyLocale(language) {
+        currentLocale = language === "en" ? "en" : "ru";
+        document.documentElement.lang = currentLocale;
+
+        setText("settingsTitle", "settings");
+        setText("sectionConnection", "sectionConnection");
+        setText("labelDiscordClientId", "labelDiscordClientId");
+        setText("descDiscordClientId", "descDiscordClientId");
+        setText("labelRichPresenceImageKey", "labelRichPresenceImageKey");
+        setText("descRichPresenceImageKey", "descRichPresenceImageKey");
+        setText("labelSoundcloudUrl", "labelSoundcloudUrl");
+        setText("descSoundcloudUrl", "descSoundcloudUrl");
+        setText("sectionRpc", "sectionRpc");
+        setText("labelRpcEnabled", "labelRpcEnabled");
+        setText("descRpcEnabled", "descRpcEnabled");
+        setText("labelRpcShowTimer", "labelRpcShowTimer");
+        setText("descRpcShowTimer", "descRpcShowTimer");
+        setText("labelRpcShowArtist", "labelRpcShowArtist");
+        setText("descRpcShowArtist", "descRpcShowArtist");
+        setText("labelRpcPausedStatus", "labelRpcPausedStatus");
+        setText("descRpcPausedStatus", "descRpcPausedStatus");
+        setText("sectionNotifications", "sectionNotifications");
+        setText("labelNotificationsEnabled", "labelNotificationsEnabled");
+        setText("descNotificationsEnabled", "descNotificationsEnabled");
+        setText("labelNotificationsStyle", "labelNotificationsStyle");
+        setText("descNotificationsStyle", "descNotificationsStyle");
+        setText("sectionHotkeys", "sectionHotkeys");
+        setText("labelHotkeyPlayPause", "labelHotkeyPlayPause");
+        setText("labelHotkeyNextTrack", "labelHotkeyNextTrack");
+        setText("labelHotkeyPrevTrack", "labelHotkeyPrevTrack");
+        setText("labelHotkeyLikeTrack", "labelHotkeyLikeTrack");
+        setText("labelHotkeyMuteToggle", "labelHotkeyMuteToggle");
+        setText("labelHotkeyToggleWindow", "labelHotkeyToggleWindow");
+        setText("sectionUi", "sectionUi");
+        setText("labelUiCoverArt", "labelUiCoverArt");
+        setText("descUiCoverArt", "descUiCoverArt");
+        setText("labelUiStartMinimized", "labelUiStartMinimized");
+        setText("descUiStartMinimized", "descUiStartMinimized");
+        setText("labelUiAutoLaunch", "labelUiAutoLaunch");
+        setText("descUiAutoLaunch", "descUiAutoLaunch");
+        setText("labelUiTitlebarHeight", "labelUiTitlebarHeight");
+        setText("descUiTitlebarHeight", "descUiTitlebarHeight");
+        setText("labelUiLanguage", "labelUiLanguage");
+        setText("descUiLanguage", "descUiLanguage");
+
+        document.getElementById("closeSettingsBtn").textContent = t("close");
+        document.getElementById("saveConnectionBtn").textContent = t("save");
+        document.getElementById("clientIdHint").textContent = t("clientIdHint");
+        document.querySelector('#rpcPausedStatus option[value="show_paused"]').textContent = t("pausedShow");
+        document.querySelector('#rpcPausedStatus option[value="clear"]').textContent = t("pausedClear");
+        document.querySelector('#uiTitlebarHeight option[value="compact"]').textContent = t("titleCompact");
+        document.querySelector('#uiTitlebarHeight option[value="normal"]').textContent = t("titleNormal");
+        document.querySelector('#uiLanguage option[value="ru"]').textContent = t("langRu");
+        document.querySelector('#uiLanguage option[value="en"]').textContent = t("langEn");
+        document.querySelectorAll(".hotkey-btn").forEach((button) => {
+          if (!rebindState || rebindState.button !== button) {
+            button.textContent = t("change");
+          }
+        });
+      }
+      let webviewBootstrapped = false;
+
+      function mergeSettings(base, next) {
+        const result = Array.isArray(base) ? [...base] : { ...base };
+        Object.entries(next || {}).forEach(([key, value]) => {
+          if (
+            value &&
+            typeof value === "object" &&
+            !Array.isArray(value) &&
+            base[key] &&
+            typeof base[key] === "object" &&
+            !Array.isArray(base[key])
+          ) {
+            result[key] = mergeSettings(base[key], value);
+          } else {
+            result[key] = value;
+          }
+        });
+        return result;
+      }
+
+      function setStatus(message, isError = false) {
+        settingsStatus.textContent = message || "";
+        settingsStatus.style.color = isError ? "var(--err)" : "var(--muted)";
+      }
+
+      function openSettings() {
+        settingsOverlay.classList.add("open");
+      }
+
+      function closeSettings() {
+        settingsOverlay.classList.remove("open");
+        stopRebind();
+      }
+
+      function cleanupTitlebar() {
+        const titlebar = document.querySelector(".titlebar");
+        if (!titlebar) return;
+
+        const allowedIds = new Set([
+          "settingsBtn",
+          "minBtn",
+          "maxBtn",
+          "closeBtn",
+          "rpcDot",
+          "rpcText",
+          "brandText",
+          "brandNickname",
+          "coverEl",
+          "coverWave",
+          "trackTitle",
+          "trackArtist",
+          "playstate",
+          "playstateLabel"
+        ]);
+
+        Array.from(titlebar.children).forEach((child) => {
+          if (
+            child.classList.contains("brand") ||
+            child.classList.contains("sep") ||
+            child.classList.contains("track") ||
+            child.classList.contains("playstate") ||
+            child.classList.contains("discord-badge") ||
+            child.classList.contains("window-controls") ||
+            child.id === "settingsBtn"
+          ) {
+            return;
+          }
+          child.remove();
+        });
+
+        Array.from(titlebar.querySelectorAll("*")).forEach((node) => {
+          if (
+            node.id &&
+            !allowedIds.has(node.id) &&
+            !node.classList.contains("brand") &&
+            !node.classList.contains("brand-circle") &&
+            !node.classList.contains("track-text") &&
+            !node.classList.contains("wave") &&
+            !node.classList.contains("wave-b") &&
+            !node.classList.contains("d-label") &&
+            !node.classList.contains("d-dot") &&
+            !node.classList.contains("wbtn")
+          ) {
+            if (!node.closest(".settings-overlay")) {
+              node.remove();
+            }
+          }
+        });
+      }
+
+      function applyUiSettings(settings) {
+        document.body.classList.toggle("compact", settings.ui.titlebarHeight === "compact");
+        Array.from(document.body.classList)
+          .filter((className) => className.startsWith("theme-"))
+          .forEach((className) => document.body.classList.remove(className));
+        document.body.classList.add(`theme-${settings.ui.theme || "ember"}`);
+        coverEl.classList.toggle("hidden", !settings.ui.coverArt);
+        discordBadge.classList.toggle("hidden", !settings.rpc.enabled);
+        const brandTextEl = document.getElementById("brandText");
+        if (brandTextEl) {
+          brandTextEl.textContent = settings.ui.brandName || "SoundCloud Desktop";
+        }
+        const brandNicknameEl = document.getElementById("brandNickname");
+        if (brandNicknameEl) {
+          brandNicknameEl.textContent = settings.ui.nickname || "Desktop User";
+        }
+      }
+
+      function fillSettings(settings) {
+        const previousUrl = currentSettings.soundcloudUrl || "";
+        currentSettings = mergeSettings(DEFAULT_SETTINGS, settings);
+
+        discordClientId.value = currentSettings.discordClientId || "";
+        richPresenceImageKey.value = currentSettings.richPresenceImageKey || "soundcloud_logo";
+        soundcloudUrl.value = currentSettings.soundcloudUrl || "https://soundcloud.com";
+
+        rpcEnabled.checked = !!currentSettings.rpc.enabled;
+        rpcShowTimer.checked = !!currentSettings.rpc.showTimer;
+        rpcShowArtist.checked = !!currentSettings.rpc.showArtist;
+        rpcPausedStatus.value = currentSettings.rpc.pausedStatus;
+        notificationsEnabled.checked = !!currentSettings.notifications.enabled;
+        notificationsStyle.value = currentSettings.notifications.style;
+        uiCoverArt.checked = !!currentSettings.ui.coverArt;
+        uiStartMinimized.checked = !!currentSettings.ui.startMinimized;
+        uiAutoLaunch.checked = !!currentSettings.ui.autoLaunch;
+        uiAlwaysOnTop.checked = !!currentSettings.ui.alwaysOnTop;
+        uiRememberLastPage.checked = !!currentSettings.ui.rememberLastPage;
+        uiFocusMode.checked = !!currentSettings.ui.focusMode;
+        uiTitlebarHeight.value = currentSettings.ui.titlebarHeight;
+        uiLanguage.value = currentSettings.ui.language || "ru";
+        uiTheme.value = currentSettings.ui.theme || "ember";
+        privacyBlockAds.checked = !!currentSettings.privacy?.blockAds;
+
+        Object.entries(currentSettings.hotkeys).forEach(([action, accelerator]) => {
+          const chip = document.getElementById(`hotkey-${action}`);
+          if (chip) chip.textContent = accelerator;
+        });
+
+        applyLocale(currentSettings.ui.language || "ru");
+        applyUiSettings(currentSettings);
+        const preferredUrl =
+          currentSettings.ui.rememberLastPage && currentSettings.state?.lastUrl
+            ? currentSettings.state.lastUrl
+            : currentSettings.soundcloudUrl;
+        if (!webviewBootstrapped || previousUrl !== currentSettings.soundcloudUrl) {
+          applyWebviewUrl(preferredUrl);
+        }
+      }
+
+      function applyWebviewUrl(url) {
+        const nextUrl = (url || "https://soundcloud.com").trim() || "https://soundcloud.com";
+        const currentSrc = scView.getAttribute("src") || "";
+        const normalizedCurrent = currentSrc.replace(/\/+$/, "");
+        const normalizedNext = nextUrl.replace(/\/+$/, "");
+        if (normalizedCurrent !== normalizedNext) {
+          scView.setAttribute("src", nextUrl);
+        }
+        webviewBootstrapped = true;
+      }
+
+      function updatePlaybackUi(payload) {
+        if (!payload || !payload.title) {
+          trackTitleEl.textContent = t("noTrack");
+          trackArtistEl.textContent = t("noArtist");
+          playstateEl.className = "playstate idle";
+          playstateLabel.textContent = t("playbackIdle");
+          coverWaveEl.style.animationPlayState = "paused";
+          return;
+        }
+
+        trackTitleEl.textContent = payload.title;
+        trackArtistEl.textContent = payload.artist || t("noArtist");
+
+        if (payload.state === "playing") {
+          playstateEl.className = "playstate";
+          playstateLabel.textContent = t("playbackPlaying");
+          coverWaveEl.style.animationPlayState = "running";
+        } else {
+          playstateEl.className = "playstate paused";
+          playstateLabel.textContent = t("playbackPaused");
+          coverWaveEl.style.animationPlayState = "paused";
+        }
+      }
+
+      function updateRpcUi(data) {
+        rpcDot.className = "d-dot";
+        const status = data?.status || "disconnected";
+
+        if (status === "connected") {
+          rpcText.textContent = "Discord";
+          rpcDot.classList.add("connected");
+        } else if (status === "connecting") {
+          rpcText.textContent = t("discordConnecting");
+        } else if (status === "reconnecting") {
+          rpcText.textContent = t("discordReconnecting");
+        } else if (status === "needs_config") {
+          rpcText.textContent = t("discordNeedId");
+        } else if (status === "disabled") {
+          rpcText.textContent = t("discordDisabled");
+        } else if (status === "error") {
+          rpcText.textContent = t("discordError");
+          rpcDot.classList.add("error");
+        } else {
+          rpcText.textContent = t("discordDefault");
+        }
+      }
+
+      function buildAccelerator(event) {
+        if (["Control", "Shift", "Alt", "Meta"].includes(event.key)) return null;
+
+        let key = "";
+        if (event.code.startsWith("Key")) {
+          key = event.code.replace("Key", "");
+        } else if (event.code.startsWith("Digit")) {
+          key = event.code.replace("Digit", "");
+        } else if (event.code.startsWith("Numpad")) {
+          key = event.code.replace("Numpad", "Num");
+        } else {
+          const specialMap = {
+            Space: "Space",
+            Enter: "Enter",
+            Escape: "Esc",
+            ArrowUp: "Up",
+            ArrowDown: "Down",
+            ArrowLeft: "Left",
+            ArrowRight: "Right",
+            MediaPlayPause: "MediaPlayPause",
+            MediaNextTrack: "MediaNextTrack",
+            MediaPreviousTrack: "MediaPreviousTrack"
+          };
+          key = specialMap[event.code] || specialMap[event.key] || event.key;
+        }
+
+        if (!key) return null;
+
+        const parts = [];
+        if (event.ctrlKey) parts.push("Ctrl");
+        if (event.altKey) parts.push("Alt");
+        if (event.shiftKey) parts.push("Shift");
+        if (event.metaKey) parts.push("Super");
+        parts.push(key.length === 1 ? key.toUpperCase() : key);
+        return parts.join("+");
+      }
+
+      function stopRebind() {
+        if (!rebindState) return;
+        clearTimeout(rebindState.timeoutId);
+        rebindState.button.textContent = t("change");
+        document.removeEventListener("keydown", rebindState.handler, true);
+        rebindState = null;
+      }
+
+      function startRebind(action, button) {
+        stopRebind();
+        button.textContent = t("listening");
+        setStatus(t("rebindPrompt"));
+
+        const handler = async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (event.key === "Escape") {
+            setStatus(t("rebindCancel"));
+            stopRebind();
+            return;
+          }
+
+          const accelerator = buildAccelerator(event);
+          if (!accelerator) return;
+
+          const result = await window.electronAPI.rebindHotkey(action, accelerator);
+          if (result?.ok) {
+            setStatus(`${t("rebindSaved")} ${accelerator}`);
+          } else {
+            setStatus(result?.error || t("rebindFailed"), true);
+          }
+          stopRebind();
+        };
+
+        const timeoutId = setTimeout(() => {
+          setStatus(t("rebindTimeout"));
+          stopRebind();
+        }, 5000);
+
+        rebindState = { action, button, handler, timeoutId };
+        document.addEventListener("keydown", handler, true);
+      }
+
+      async function applySoundCloudCssFixes() {
+        if (!scView) return;
+        try {
+          const focusModeCss = currentSettings.ui.focusMode
+            ? `
+            .l-sidebar-left,
+            .l-sidebar-right,
+            .listenNetwork,
+            .playbackTimeline__soundBadge,
+            .soundActions,
+            .commentsList,
+            .comments,
+            .upsellBanner,
+            [class*="upsell"],
+            [class*="advert"],
+            iframe {
+              display: none !important;
+            }
+            `
+            : "";
+
+          await scView.insertCSS(`
+            html, body {
+              scrollbar-width: none !important;
+            }
+
+            ::-webkit-scrollbar {
+              width: 0 !important;
+              height: 0 !important;
+              display: none !important;
+            }
+
+            .layout__left,
+            .layout__resizeHandle,
+            .gutter,
+            [class*="resizeHandle"] {
+              border-left: none !important;
+              box-shadow: none !important;
+            }
+
+            .grecaptcha-badge,
+            iframe[src*="intercom"],
+            iframe[src*="crisp"],
+            iframe[src*="chat"],
+            iframe[src*="widget"],
+            [class*="chatWidget"],
+            [class*="intercom"],
+            [class*="launcher"],
+            [class*="floating"],
+            [class*="cookieBanner"],
+            [class*="consent"],
+            [class*="prompt"] {
+              display: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }
+
+            ${focusModeCss}
+          `);
+        } catch (err) {
+        }
+      }
+
+      async function pollSoundCloud() {
+        if (!scView) return;
+        try {
+          const data = await scView.executeJavaScript(`
+            (() => {
+              const extractArtworkUrl = () => {
+                const imageNode =
+                  document.querySelector('.playbackSoundBadge__avatar .image__full') ||
+                  document.querySelector('.playbackSoundBadge__avatar span.sc-artwork') ||
+                  document.querySelector('.playbackSoundBadge__avatar img');
+
+                if (!imageNode) return '';
+
+                if (imageNode.src) return imageNode.src;
+
+                const style = getComputedStyle(imageNode);
+                const bg = imageNode.style.backgroundImage || style.backgroundImage || '';
+                const match = bg.match(/url\\(["']?(.*?)["']?\\)/);
+                return match ? match[1] : '';
+              };
+
+              const titleEl =
+                document.querySelector('.playbackSoundBadge__titleLink') ||
+                document.querySelector('.playbackSoundBadge__title');
+              const artistEl =
+                document.querySelector('.playbackSoundBadge__lightLink') ||
+                document.querySelector('.playbackSoundBadge__lightLink a');
+              const title = titleEl ? titleEl.textContent.trim() : '';
+              const artist = artistEl ? artistEl.textContent.trim() : '';
+              const artworkUrl = extractArtworkUrl();
+              const isPlaying =
+                !!document.querySelector('.playControls__play.playing') ||
+                !!document.querySelector('[class*="playButton"][class*="playing"]');
+              const audio = document.querySelector('audio');
+              const durationSec = audio ? Math.floor(audio.duration) || 0 : 0;
+              const elapsedSec = audio ? Math.floor(audio.currentTime) || 0 : 0;
+              return {
+                title,
+                artist,
+                artworkUrl,
+                state: isPlaying ? 'playing' : 'paused',
+                durationSec,
+                elapsedSec
+              };
+            })();
+          `);
+
+          if (!data || !data.title) {
+            window.electronAPI.trackStopped();
+            updatePlaybackUi(null);
+            return;
+          }
+
+          updatePlaybackUi(data);
+          if (data.state === "playing") {
+            window.electronAPI.trackPlaying(data);
+          } else {
+            window.electronAPI.trackPaused(data);
+          }
+        } catch (err) {
+          window.electronAPI.trackStopped();
+          updatePlaybackUi(null);
+        }
+      }
+
+      function bindSetting(id, key, type = "toggle") {
+        const el = document.getElementById(id);
+        const getValue = () => (type === "toggle" ? el.checked : el.value);
+        el.addEventListener("change", () => {
+          if (key === "ui.theme") {
+            currentSettings = mergeSettings(currentSettings, { ui: { theme: getValue() } });
+            applyUiSettings(currentSettings);
+          }
+          window.electronAPI.settingsSet(key, getValue());
+          setStatus(t("saved"));
+        });
+      }
+
+      saveConnectionBtn.addEventListener("click", () => {
+        window.electronAPI.settingsSet("discordClientId", discordClientId.value.trim());
+        window.electronAPI.settingsSet("richPresenceImageKey", richPresenceImageKey.value.trim() || "soundcloud_logo");
+        window.electronAPI.settingsSet("soundcloudUrl", soundcloudUrl.value.trim() || "https://soundcloud.com");
+        setStatus(t("connectionSaved"));
+      });
+
+      bindSetting("rpcEnabled", "rpc.enabled");
+      bindSetting("rpcShowTimer", "rpc.showTimer");
+      bindSetting("rpcShowArtist", "rpc.showArtist");
+      bindSetting("rpcPausedStatus", "rpc.pausedStatus", "select");
+      bindSetting("notificationsEnabled", "notifications.enabled");
+      bindSetting("notificationsStyle", "notifications.style", "select");
+      bindSetting("uiCoverArt", "ui.coverArt");
+      bindSetting("uiStartMinimized", "ui.startMinimized");
+      bindSetting("uiAutoLaunch", "ui.autoLaunch");
+      bindSetting("uiAlwaysOnTop", "ui.alwaysOnTop");
+      bindSetting("uiRememberLastPage", "ui.rememberLastPage");
+      bindSetting("uiFocusMode", "ui.focusMode");
+      bindSetting("uiTitlebarHeight", "ui.titlebarHeight", "select");
+      bindSetting("uiLanguage", "ui.language", "select");
+      bindSetting("uiTheme", "ui.theme", "select");
+      bindSetting("privacyBlockAds", "privacy.blockAds");
+
+      document.querySelectorAll(".hotkey-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          startRebind(button.dataset.action, button);
+        });
+      });
+
+      settingsOverlay.addEventListener("click", (event) => {
+        if (event.target === settingsOverlay) closeSettings();
+      });
+
+      settingsBtn.addEventListener("click", openSettings);
+      closeSettingsBtn.addEventListener("click", closeSettings);
+
+      minBtn.addEventListener("click", () => window.electronAPI.windowControl("minimize"));
+      maxBtn.addEventListener("click", () => window.electronAPI.windowControl("maximize"));
+      closeBtn.addEventListener("click", () => window.electronAPI.windowControl("close"));
+
+      window.electronAPI.onWindowMaximized((isMaximized) => {
+        maxBtn.textContent = isMaximized ? "❐" : "▢";
+      });
+
+      window.electronAPI.onRpcStatus((data) => {
+        updateRpcUi(data);
+      });
+
+      window.electronAPI.onSettingsChanged((settings) => {
+        fillSettings(settings);
+      });
+
+      scView.addEventListener("did-finish-load", () => {
+        applySoundCloudCssFixes();
+        pollSoundCloud();
+      });
+
+      scView.addEventListener("did-navigate", (event) => {
+        if (currentSettings.ui.rememberLastPage && event.url) {
+          window.electronAPI.settingsSet("state.lastUrl", event.url);
+        }
+      });
+
+      scView.addEventListener("did-navigate-in-page", (event) => {
+        if (currentSettings.ui.rememberLastPage && event.url) {
+          window.electronAPI.settingsSet("state.lastUrl", event.url);
+        }
+      });
+
+      window.electronAPI.settingsGet().then((settings) => {
+        fillSettings(settings);
+        if (!settings || !settings.discordClientId) {
+          discordClientId.value = "";
+        }
+      });
+
+      cleanupTitlebar();
+      setInterval(pollSoundCloud, 2000);
+    </script>
+  </body>
+</html>

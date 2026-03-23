@@ -1,0 +1,42 @@
+{
+  "name": "soundcloud-desktop",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "SoundCloud desktop player with Discord Rich Presence",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "npm run dist:exe && npm run dist:portable && npm run dist:zip",
+    "dist:exe": "electron-builder --win nsis --config.artifactName=HomyCloud-Setup-${version}.${ext}",
+    "dist:portable": "electron-builder --win portable --config.artifactName=HomyCloud-Portable-${version}.${ext}",
+    "dist:zip": "electron-builder --win zip --config.artifactName=HomyCloud-${version}-win-${arch}.${ext}"
+  },
+  "build": {
+    "appId": "com.homychok.homycloud",
+    "productName": "HomyCloud",
+    "win": {
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ]
+    },
+    "nsis": {
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    }
+  },
+  "dependencies": {
+    "discord-rpc": "4.0.1"
+  },
+  "devDependencies": {
+    "electron": "28.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}
